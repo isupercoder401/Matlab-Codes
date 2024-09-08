@@ -1,0 +1,10 @@
+ts=1.e-4;
+t=-0.04:ts:0.04;
+m_sig=triangle(t/2);
+B_m=150;
+fc=300;
+h=fir1(40,[B_m*ts]);
+mod=(1+m_sig).*cos(2*3.14*fc*t);
+dem=mod.*(mod>0);
+rec=filter(h,1,dem);
+plot(t,rec);

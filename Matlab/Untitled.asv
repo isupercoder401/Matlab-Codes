@@ -1,0 +1,12 @@
+ts=1.e-4;
+t=-0.04:ts:0.04;
+lfft=length(t);
+lfft=2^ceil(log2(lfft));
+freqm=[-lfft/2:lfft/2-1]/(lfft*ts);
+g=triplesinc(t,0.01);
+G=fftshift(fft(g,lfft));
+figure(1);plot(t,g);
+figure(2);plot(freqm,abs(G));
+h=fir1(40,[150*ts]);
+fc=300;
+mod=(1+g).*cos(2*pi*fc*t);
